@@ -1,15 +1,4 @@
-# This script simulates point vortices in the plane
-# This version uses essentially the numpy equivalent of Matlab's ODE45 solver,
-# which works well unless the system of ODEs becomes stiff, which occurs when
-# two point vortices nearly collide.
-#
-# Future to do:
-# - backward Euler solver
-# - symplectic solver
-# - visualize as you solve to detect collapse
-# - validate with analytical result
-# - visualization is not true to time axis
-#
+
 
 
 import numpy as np
@@ -17,12 +6,15 @@ from scipy.integrate import solve_ivp
 pi = np.pi
 # Simulation setup
 
-#initial conditions
-Gamma=np.array([1,1])
-Tmax=20
-t_vals = np.linspace(0,Tmax)
-x=np.array([1, 0])
-y=np.array([1, 0])
+#initial conditions: self-similar configuration of equilateral triangle
+Gamma=np.array([1,1,1])
+Tmax=140
+t_vals = np.linspace(0,Tmax,300)
+x=np.array([1, 3, 2])
+y=np.array([3, 3, 3+2*np.cos(pi/6.0)])
+
+
+#reformat position data
 pos = np.array(list(zip(x,y)))
 x0 = pos.flatten()
 N=len(Gamma) # number of vortices
@@ -62,8 +54,8 @@ sol = solve_ivp(lambda t,x : f(x,Gamma), (0,Tmax), x0, t_eval = t_vals)
 pos = sol.y.reshape(N,2,len(sol.t))
 
 delta = 0.025
-x = np.arange(-1.0,2.0, delta)
-y = np.arange(-1.0,2.0, delta)
+x = np.arange(0,5.0, delta)
+y = np.arange(0,5.0, delta)
 X,Y = np.meshgrid(x,y)
 
 #get flow lines
@@ -97,8 +89,8 @@ from matplotlib.animation import FuncAnimation
 levels = np.linspace(-0.30,0.30)
 (fig, ax) = plt.subplots()
 
-ax.set_xlim(-1, 2)
-ax.set_ylim(-1, 2)
+ax.set_xlim(x[0], x[-1])
+ax.set_ylim(y[0], y[-1])
 xdata = pos[:,0,0]
 ydata = pos[:,1,0]
 Z = streamlines(X,Y,xdata,ydata,Gamma)
@@ -116,6 +108,7 @@ def update(frame):
     scat.set_offsets(np.c_[xdata, ydata])
     Z = streamlines(X,Y,xdata,ydata,Gamma)
     ax.contour(X,Y,Z,levels, colors = 'k', linestyles = 'solid', linewidths = 1.0, zorder = -1)
+    ax.set_aspect('equal','box')
 
     return (scat,ax)
 

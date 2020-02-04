@@ -1,0 +1,46 @@
+This is BibTeX, Version 0.99d (TeX Live 2015)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: point_vortex_dynamics.aux
+The style file: abbrv.bst
+Database file #1: mybib.bib
+You've used 2 entries,
+            2118 wiz_defined-function locations,
+            513 strings with 4022 characters,
+and the built_in function-call counts, 543 in all, are:
+= -- 47
+> -- 20
+< -- 2
++ -- 10
+- -- 6
+* -- 38
+:= -- 96
+add.period$ -- 7
+call.type$ -- 2
+change.case$ -- 8
+chr.to.int$ -- 0
+cite$ -- 2
+duplicate$ -- 26
+empty$ -- 47
+format.name$ -- 6
+if$ -- 110
+int.to.chr$ -- 0
+int.to.str$ -- 2
+missing$ -- 4
+newline$ -- 14
+num.names$ -- 4
+pop$ -- 13
+preamble$ -- 1
+purify$ -- 7
+quote$ -- 0
+skip$ -- 13
+stack$ -- 0
+substring$ -- 12
+swap$ -- 6
+text.length$ -- 2
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 4
+warning$ -- 0
+while$ -- 4
+width$ -- 3
+write$ -- 27

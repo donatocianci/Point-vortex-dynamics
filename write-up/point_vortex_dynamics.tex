@@ -1,0 +1,174 @@
+\documentclass[10pt,oneside]{amsart}
+%
+
+\usepackage{amsmath,amssymb,mathtools,amsthm}
+\usepackage{url}
+\usepackage{amscd}
+\usepackage{geometry}
+\usepackage{enumerate}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{enumerate}
+\usepackage{bm}
+
+%
+% CHANGE THE PAPER MARGINS-------------------------------------------------------------
+%
+% IF PUBLISHING OR SENDING TO SOMEONE SWITCH TO THIS GEOMETRY
+%\geometry{
+% papersize = {8.5in,11in},
+% lmargin=1.25 in,
+% rmargin = 1.25 in,
+% top=1.25 in,
+% }
+% IF READING ON A COMPUTER SWITCH TO THIS GEOMETRY
+\geometry{
+ papersize = {6in,9in},
+ lmargin=0.5 in,
+ rmargin = 0.5 in,
+ top=0.5 in,
+ bottom=0.5 in
+ }
+
+
+%
+%CHANGE SECTION TITLE FORMATTING-----------------------------------------------------
+%
+
+\makeatletter
+\def\section{\@startsection{section}{1}{0in}%
+                                   {1.3ex \@plus .5ex \@minus .2ex}%
+                                   {-.5em \@plus -.1em}%
+                                   {\reset@font\normalsize\bfseries}}
+\def\subsection{\@startsection{subsection}{2}{.25in}%
+                                     {1.3ex\@plus .5ex \@minus .2ex}%
+                                     {-.5em \@plus -.1em}%
+                                     {\reset@font\normalsize\bfseries}}
+\def\subsubsection{\@startsection{subsubsection}{3}{.25in}%
+                                     {1.3ex\@plus .5ex \@minus .2ex}%
+                                     {-.5em \@plus -.1em}%
+                                     {\reset@font\normalsize\bfseries}}
+\makeatother
+
+\makeatletter
+\renewcommand{\@secnumfont}{\bfseries}
+\makeatother
+
+
+%
+% THEOREM Environments -----------------------------------------------------
+%
+ \newtheorem{thm}{Theorem}[section]
+ \newtheorem{cor}[thm]{Corollary}
+ \newtheorem{lem}[thm]{Lemma}
+ \newtheorem{prop}[thm]{Proposition}
+ \theoremstyle{definition}
+ \newtheorem{defn}[thm]{Definition}
+ \theoremstyle{remark}
+ \newtheorem{rem}[thm]{Remark}
+ \newtheorem*{ex}{Example}
+ \numberwithin{equation}{section}
+
+
+%
+%MACROS --------------------------------------------------------------------------------
+%
+\newcommand\restr[2]{{% we make the whole thing an ordinary symbol
+  \left.\kern-\nulldelimiterspace % automatically resize the bar with \right
+  #1 % the function
+  \vphantom{\big|} % pretend it's a little taller at normal size
+  \right|_{#2} % this is the delimiter
+  }}
+
+
+\begin{document}
+
+\section{Deriving equations of motion for point vortices}
+
+This section will be a thumbnail sketch of the ideas that go into deriving the equations of motion for point vortices in the plane. Let $\bf u$ be a vector field in $\mathbb{R}^3$, where ${\bf u }(x,y,z, t)$ will represent the velocity of a particle in the fluid at point $(x,y,z)$ and time $t$. Let $\rho$ be a smooth real-valued function that represents the density of the fluid. By considering an arbitrary blob of fluid and enforcing conservation of mass we get a differential equation for the density function:
+\begin{align}
+\label{eqn:continuity}
+\frac{d \rho}{d t} +\mathrm{div}(\rho {\bf u}) = 0.
+\end{align}
+For a derivation see page 3 of \cite{book:chorin}. Equation \eqref{eqn:continuity} is known as the {\it continuity equation.}
+
+Next we turn to Newton's second law. Using the chain rule to differentiate along the fluid flow we introduce the {\it material derivative}:
+\begin{align*}
+\frac{D}{Dt} = \partial_t + {\bf u} \cdot \nabla. 
+\end{align*}
+We need to consider the force on an arbitrary blob of fluid. The forces will come in two varieties: the {\it body forces}, which are external forces like gravity or magnetism and the {\it stress forces}, which are forces that act across the surface. We will assume that we are dealing with an {\it ideal fluid}, which means that there is a pressure function $p(x,y,z,t)$ so that the force per unit area across the blob of fluid is $p(x,y,z,t) {\bf n}$, where ${\bf n}$ is the outward unit normal to the blob. From Newton's second law, we get (see page 6 of \cite{book:chorin}) the {\it balance of momentum equation}:  
+\begin{align}
+\rho \frac{D {\bf u}}{Dt} = - \nabla p + \rho {\bf b},
+\end{align}
+where ${\bf b}$ is the body force per unit mass. 
+
+We will also assume that our fluid is {\it incompressible}, which means that a blob of fluid does not change volume as it flows along in time. Using the lemma on page 8 of \cite{book:chorin}, one can deduce that this is equivalent to $\mathrm{div}({\bf u}) = 0$. Therefore, the equations that govern an ideal, incompressible fluid are:
+\begin{align*}
+\rho \frac{D {\bf u}}{Dt} &= - \nabla p + \rho {\bf b} \\
+\frac{D \rho}{Dt} &= 0 \\
+\mathrm{div}(\bf{u}) &= 0. 
+\end{align*}
+These equations are known as the {\it Euler Equations} for an ideal incompressible fluid.
+
+We will be interested in the {\it vorticity} of our fluid:
+\begin{align*}
+\bm{\omega} = \nabla \times {\bf u}. 
+\end{align*}
+We will also assume now that the density of our fluid is constant, i.e. the fluid is homogeneous. With this assumption and the incompressibility hypothesis, one can check (see the proof of the proposition on the bottom of page 23 of \cite{book:chorin}, note the change in notation) that the vorticity satisfies:
+\begin{align}
+\label{eqn:vorticity}
+\frac{D \bm{\omega}}{Dt}  = (\bm{\omega} \cdot \nabla) \bf{u}. 
+\end{align} 
+
+Recall from vector calculus that any sufficiently smooth and rapidly decaying vector field ${\bf u}$ in $\mathbb{R}^3$ can be decomposed:
+\begin{align*}
+{\bf u} = \nabla \phi + \nabla \times \bm{\psi},
+\end{align*}  
+where $\phi$ is a real-valued function (called the {\it velocity potential}) and $\bm{\psi}$ is a vector field called the vector potential. This decomposition is known as the {\it Helmholtz Decomposition}. 
+
+We will now specialize to the case of an ideal incompressible fluid confined to the $(x,y)$-plane in $\mathbb{R}^3$. In this case \eqref{eqn:vorticity} becomes:
+\begin{align*}
+\frac{D \omega}{Dt} = 0, 
+\end{align*}
+where now we can think of the vorticity $\omega$ as a scalar function given by: $\bm{\omega} = \omega \bf{e_3}$. Similarly, the Helmholtz Decomposition of our fluid ${\bf u}$ will be (recall ${\bf u}$ is divergence free):
+\begin{align*}
+{\bf u} = \nabla \times \bm{\psi} = \nabla \times (\psi {\bf e_3}) =  (\partial_y \psi, -\partial_x \psi).
+\end{align*}
+The function $\psi$ is known as the {\it streamfunction} and it's level curves are the streamlines of the fluid particles (see the discussion at the bottom of page 9 of \cite{book:newton}). Using the definition of vorticity we get a relationship between the streamfunction and the vorticity (see page 28 of \cite{book:chorin}):
+\begin{align}
+\label{eqn:poisson}
+\Delta \psi =- \omega, 
+\end{align}
+where $\Delta = \partial_x^2+ \partial_y^2$ is a the {\it Laplace operator}. 
+Notice that the streamfunction determines the vorticity and vice versa (up to constant functions). 
+
+\begin{ex}[Point vortex] Assume that our vorticity field is initially given by $\omega({\bf x}) = \frac{\Gamma}{2 \pi} \delta ({\bf x} - {\bf x_0})$, a delta function centered at ${\bf x_0}$. This can be used to model a localized patch of vorticity (similar to how one might consider a complicated body to behave as a point mass). The streamfunction $\psi$ then solves \eqref{eqn:poisson}. In this case:
+\begin{align*}
+\psi({\bf x} ) = -\frac{\Gamma}{4 \pi^2} \mathrm{log}(\left | {\bf x} - {\bf x_0} \right |).
+\end{align*}
+One can check that the corresponding velocity field is:
+\begin{align*}
+{\bf u} = \left(\Gamma \frac{-y+y_0}{ 4 \pi^2\left | {\bf x} - {\bf x_0} \right |^2},\Gamma \frac{x - x_0}{4 \pi^2 \left | {\bf x} - {\bf x_0} \right |^2} \right) 
+\end{align*}
+and that the flow is {\it stationary} (independent of time). Therefore a passive tracer particle would orbit around the vortex in a circle centered at ${\bf x_0}$.
+\end{ex}
+
+\subsection{Point vortex dynamics} Generalizing the previous example, assume that our vorticity field is initially a linear combination of point vortices:
+\begin{align*}
+\omega({\bf x}) = \sum_{\alpha} \frac{\Gamma_\alpha}{2 \pi} \delta ({\bf x} - {\bf x_\alpha}).
+\end{align*}
+Since \eqref{eqn:poisson} is linear then the corresponding streamfunction is a linear combination of streamfunctions for a single point vortex:
+\begin{align*}
+\psi({\bf x}) = -\frac{1}{4 \pi^2} \sum_\alpha \Gamma_\alpha \mathrm{log}(\left | {\bf x} - {\bf x_\alpha} \right |).
+\end{align*}
+Moreover, since the velocity field depends linearly on the streamfunction and the point vortices advect according to the velocity field, the point vortex positions satisfy the following differential equation:
+\begin{align}
+\dot{{\bf x}}_\alpha = \left( \sum_{\beta \neq \alpha}\frac{\Gamma_\beta(-y_\alpha+y_\beta)}{4 \pi^2\left | {\bf x_\alpha} - {\bf x_\beta} \right |^2}, \sum_{\beta \neq \alpha}\frac{\Gamma_\beta(x_\alpha - x_\beta)}{4 \pi^2 \left | {\bf x_\alpha} - {\bf x_\beta} \right |^2} \right).
+\end{align}
+
+\section{Equations of motion in different geometries} After deriving the equations of motion for point vortices in the plane, we 
+\bibliographystyle{abbrv}
+\bibliography{mybib}
+
+
+\end{document} 
